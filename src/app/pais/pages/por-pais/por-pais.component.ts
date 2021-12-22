@@ -13,12 +13,13 @@ export class PorPaisComponent  {
   public busquedaErr: boolean = false;
   public busquedaPaises: Pais[] = [];
 
-  constructor( private pais: PaisService ) { }
+  constructor( private paisService: PaisService ) { }
 
-  buscar(){
+  buscar( busqueda:string ){
     this.busquedaErr = false;
+    this.busqueda = busqueda;
 
-    this.pais.buscarPais(this.busqueda)
+    this.paisService.buscarPais(this.busqueda)
     .subscribe( 
       (resp) => {
         console.log(resp);
