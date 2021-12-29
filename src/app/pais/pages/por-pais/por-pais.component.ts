@@ -31,4 +31,9 @@ export class PorPaisComponent  {
       }
     );
   }
+
+  sugerencias( busqueda:string ){
+    this.busquedaErr = false;
+    console.log( busqueda )
+  }
 }

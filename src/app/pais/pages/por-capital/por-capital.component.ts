@@ -1,15 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Pais } from '../../interfaces/pais.interface';
+import { PaisService } from '../../services/pais.service';
 
 @Component({
   selector: 'app-por-capital',
   templateUrl: './por-capital.component.html',
-  styleUrls: ['./por-capital.component.css']
+  styleUrls: ['./por-capital.component.css'],
 })
-export class PorCapitalComponent implements OnInit {
+export class PorCapitalComponent {
 
-  constructor() { }
+  public busqueda: string = '';
+  public busquedaErr: boolean = false;
+  public busquedaCapital: Pais[] = [];
 
-  ngOnInit(): void {
+  constructor( private paisService: PaisService) {}
+
+  buscar(busqueda: string) {
+    this.busquedaErr = false;
+    this.busqueda = busqueda;
+
+    this.paisService.buscarCapital(this.busqueda)
+    .subscribe( 
+      (resp) => {
+        console.log(resp);
+        this.busquedaCapital = resp;
+      },
+      (err) => {
+        this.busquedaErr = true;
+        this.busquedaCapital = [];
+      }
+    );
   }
 
+  sugerencias(busqueda: string) {}
 }

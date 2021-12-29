@@ -1,2 +1,22 @@
-<h2>Por Región</h2>
-<hr>
+
+  <h2>
+    Por Región <small>{{ regionActiva | titlecase }}</small>
+  </h2>
+  <hr />
+
+  <div class="animate__animated animate__zoomInUp animate__faster">
+  <button
+    *ngFor="let region of regiones"
+    (click)="activarRegion(region)"
+    class="btn btn-outline-primary m-1"
+    [class.active]="region === regionActiva"
+  >
+    {{ region | titlecase }}
+  </button>
+</div>
+
+<div *ngIf="paisesRegion.length > 0" class="row">
+  <div class="col">
+    <app-pais-tabla [paises]="paisesRegion"></app-pais-tabla>
+  </div>
+</div>
